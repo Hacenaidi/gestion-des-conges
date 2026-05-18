@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.leavemng.controllers.admin.PendingRequestsController" spacing="12.0" alignment="CENTER">
+    <Label text="Pending Requests" />
+    <TableView fx:id="requestsTable">
+        <columns>
+            <TableColumn text="ID" fx:id="idColumn"/>
+            <TableColumn text="User" fx:id="userColumn"/>
+            <TableColumn text="Start Date" fx:id="startDateColumn"/>
+            <TableColumn text="End Date" fx:id="endDateColumn"/>
+            <TableColumn text="Reason" fx:id="reasonColumn"/>
+            <TableColumn text="Days" fx:id="daysColumn"/>
+            <TableColumn text="Status" fx:id="statusColumn"/>
+        </columns>
+    </TableView>
+    <HBox spacing="10" alignment="center">
+        <Button text="Dashboard" onAction="#handleDashboardButtonAction"/>
+        <Button fx:id="approveButton" text="Approve" onAction="#handleApproveButtonAction"/>
+        <Button fx:id="rejectButton" text="Reject" onAction="#handleRejectButtonAction"/>
+    </HBox>
+
+</VBox>

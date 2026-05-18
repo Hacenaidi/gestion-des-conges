@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            prefHeight="437.0" prefWidth="400.0"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.leavemng.controllers.RequestLeaveController">
+    <VBox layoutX="50" layoutY="50" spacing="12">
+        <Label text="Start Date" />
+        <DatePicker fx:id="startDatePicker" prefWidth="300" />
+        <Label text="End Date" />
+        <DatePicker fx:id="endDatePicker" prefWidth="300" />
+        <Label text="Number of Days" />
+        <Label fx:id="daysLabel" prefWidth="300" style="-fx-font-weight: bold; -fx-text-fill: #3b82f6;" />
+        <Label text="Reason" />
+        <TextArea fx:id="reasonTextArea" prefWidth="300" prefHeight="200" />
+        <Label text="Leave Type" />
+        <ComboBox fx:id="idTypeComboBox" prefWidth="300" />
+        <Label fx:id="errorLabel" id="errorLabel" prefWidth="300" />
+        <Button prefWidth="300" text="Submit Leave Request" onAction="#handleSubmitButtonAction" alignment="CENTER" mnemonicParsing="false" prefHeight="70.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Button prefWidth="300" text="Back to Dashboard" onAction="#handleDashboardButtonAction" alignment="CENTER" mnemonicParsing="false" prefHeight="70.0">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+    </VBox>
+</AnchorPane>

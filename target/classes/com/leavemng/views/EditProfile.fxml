@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="10.0" prefHeight="437.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.leavemng.controllers.EditProfileController">
+    <Label text="Edit Profile" />
+    
+    <VBox spacing="3.0">
+        <Label text="Full Name:" style="-fx-font-size: 14.0; -fx-font-weight: bold;"/>
+        <TextField fx:id="nameField" promptText="Enter full name"/>
+    </VBox>
+
+    <VBox spacing="3.0">
+        <Label text="Email:" style="-fx-font-size: 14.0; -fx-font-weight: bold;"/>
+        <TextField fx:id="emailField" promptText="Enter email"/>
+    </VBox>
+    
+    <VBox spacing="3.0">
+        <Label text="Phone:" style="-fx-font-size: 14.0; -fx-font-weight: bold;"/>
+        <TextField fx:id="phoneField" promptText="Enter phone"/>
+    </VBox>
+    
+    <VBox spacing="3.0">
+        <Label text="Department:" style="-fx-font-size: 14.0; -fx-font-weight: bold;"/>
+        <TextField fx:id="departementField" promptText="Enter department"/>
+    </VBox>
+    
+    <VBox spacing="3.0">
+        <Label text="Birth Date:" style="-fx-font-size: 14.0; -fx-font-weight: bold;"/>
+        <TextField fx:id="birthDateField" promptText="Enter birth date (YYYY-MM-DD)"/>
+    </VBox>
+    
+    <Label fx:id="errorLabel" style="-fx-text-fill: red;"/>
+    
+    <Button fx:id="saveButton" text="Save" onAction="#handleSaveButtonAction" alignment="CENTER" mnemonicParsing="false" prefHeight="60.0" prefWidth="400.0">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font>
+    </Button>
+    
+    <Button fx:id="cancelButton" text="Cancel" onAction="#handleCancelButtonAction" alignment="CENTER" mnemonicParsing="false" prefHeight="60.0" prefWidth="400.0">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font>
+    </Button>
+</VBox>

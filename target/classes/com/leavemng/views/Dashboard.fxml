@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="12.0" prefHeight="437.0" prefWidth="663.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.leavemng.controllers.DashboardController">
+   <children>
+   <Label text="Dashboard" />
+      <Button fx:id="requestsButton" alignment="CENTER" mnemonicParsing="false" prefHeight="93.0" prefWidth="663.0" text="Requests" onAction="#handlePersonalRequestsButtonAction">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="profileButton" alignment="CENTER" mnemonicParsing="false" prefHeight="93.0" prefWidth="663.0" text="My Profile" onAction="#handleProfileButtonAction">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="requestLeaveButton" alignment="CENTER" mnemonicParsing="false" prefHeight="93.0" prefWidth="673.0" text="Request Leave" onAction="#handleRequestLeaveButtonAction">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="adminDashboardButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" prefHeight="93.0" prefWidth="664.0" text="Admin Dashboard" onAction="#handleAdminDashboardButtonAction">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="logoutButton" alignment="CENTER" mnemonicParsing="false" prefHeight="93.0" prefWidth="684.0" text="Logout" onAction="#handleLogoutButtonAction">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</VBox>

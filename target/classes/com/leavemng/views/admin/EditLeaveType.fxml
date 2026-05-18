@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="10.0" prefHeight="437.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.leavemng.controllers.admin.EditLeaveTypeController">
+    <Label fx:id="pageTitle" text="Add Leave Type"/>
+    <VBox spacing="3.0">
+        <Label text="Name" />
+        <TextField fx:id="nameField" promptText="Enter name"/>
+    </VBox>
+    <VBox spacing="3.0">
+        <Label text="Max Days" />
+        <TextField fx:id="maxDaysField" promptText="Enter max days"/>
+    </VBox>
+    <VBox spacing="3.0">
+        <Label text="Description" />
+        <TextField fx:id="descriptionField" promptText="Enter description"/>
+    </VBox>
+    <Button fx:id="saveButton" text="Save" onAction="#handleSaveButtonAction" alignment="CENTER" mnemonicParsing="false" prefHeight="60.0" prefWidth="400.0">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font>
+    </Button>
+    <Button fx:id="backButton" text="Back" onAction="#handleBackButtonAction" alignment="CENTER" mnemonicParsing="false" prefHeight="60.0" prefWidth="400.0">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font>
+    </Button>
+    
+    <Label fx:id="error"/>
+</VBox>
