@@ -12,11 +12,9 @@ public class DatabaseInitializer {
              Statement stmt = conn.createStatement()) {
             
             // Create User table
-                String createUserTable = "CREATE TABLE IF NOT EXISTS user (" +
+            String createUserTable = "CREATE TABLE IF NOT EXISTS user (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "username TEXT NOT NULL," +
-                    "name TEXT," +
-                    "email TEXT UNIQUE NOT NULL," +
+                    "username TEXT UNIQUE NOT NULL," +
                     "password TEXT NOT NULL," +
                     "phone TEXT," +
                     "is_admin BOOLEAN DEFAULT 0," +
@@ -38,7 +36,7 @@ public class DatabaseInitializer {
             System.out.println("✓ LeaveType table created/verified");
             
             // Create LeaveRequest table
-                String createLeaveRequestTable = "CREATE TABLE IF NOT EXISTS leave_request (" +
+            String createLeaveRequestTable = "CREATE TABLE IF NOT EXISTS leave_request (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "uid INTEGER NOT NULL," +
                     "start_date TEXT NOT NULL," +
@@ -46,7 +44,6 @@ public class DatabaseInitializer {
                     "reason TEXT," +
                     "id_type INTEGER NOT NULL," +
                     "status TEXT DEFAULT 'pending'," +
-                    "days INTEGER DEFAULT 0," +
                     "FOREIGN KEY(uid) REFERENCES user(id)," +
                     "FOREIGN KEY(id_type) REFERENCES leave_type(id)" +
                     ")";

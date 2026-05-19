@@ -1,4 +1,3 @@
-LeaveRequest{id=1, uid=2, startDate=2026-05-07, endDate=2026-05-09, reason='tesr', status='rejected'}
-LeaveRequest{id=2, uid=2, startDate=2026-05-07, endDate=2026-05-09, reason='cecc', status='rejected'}
-LeaveRequest{id=3, uid=2, startDate=2026-05-14, endDate=2026-05-15, reason='tesr', status='approved'}
-LeaveRequest{id=4, uid=2, startDate=2026-05-21, endDate=2026-05-22, reason='jjj', status='approved'}
+LeaveRequest{id=1, uid=2, startDate=2026-05-14, endDate=2026-05-15, reason='birth day', status='approved'}
+LeaveRequest{id=2, uid=2, startDate=2026-05-14, endDate=2026-05-13, reason='jjjj', status='rejected'}
+LeaveRequest{id=3, uid=2, startDate=2026-05-15, endDate=2026-05-15, reason='mmm', status='rejected'}

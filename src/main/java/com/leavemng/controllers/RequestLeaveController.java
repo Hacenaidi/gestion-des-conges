@@ -92,6 +92,8 @@ public class RequestLeaveController {
       .getSelectionModel()
       .getSelectedItem(); // Get selected leave type
 
+    LocalDate today = LocalDate.now();
+
     if (
       startDate == null ||
       endDate == null ||
@@ -99,6 +101,11 @@ public class RequestLeaveController {
       selectedLeaveType == null
     ) {
       errorLabel.setText("Please fill in all fields.");
+      return;
+    }
+
+    if (!startDate.isAfter(today) || !endDate.isAfter(today)) {
+      errorLabel.setText("The start date and end date must be after today.");
       return;
     }
 
