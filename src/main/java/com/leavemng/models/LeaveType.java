@@ -31,7 +31,7 @@ public class LeaveType {
     }
     @Override
     public String toString() {
-        return this.name; // this will be displayed in the ComboBox
+        return this.name + " (max " + this.max_days + " days)"; // displayed in the ComboBox
     }
 
     }

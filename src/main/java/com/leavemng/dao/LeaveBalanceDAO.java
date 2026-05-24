@@ -13,6 +13,62 @@ import com.leavemng.dao.LeaveBalanceDAO; // Import LeaveBalanceDAO
 
 public class LeaveBalanceDAO {
 
+    public LeaveBalance getLeaveBalance(int userId, int leaveTypeId) {
+        return findLeaveBalance(userId, leaveTypeId);
+    }
+
+    public void ensureLeaveBalanceExists(int userId, int leaveTypeId) throws SQLException {
+        if (findLeaveBalance(userId, leaveTypeId) == null) {
+            createLeaveBalance(userId, leaveTypeId);
+        }
+    }
+
+    public void validateLeaveBalance(int userId, int leaveTypeId, int days) throws SQLException {
+        ensureLeaveBalanceExists(userId, leaveTypeId);
+        LeaveBalance leaveBalance = findLeaveBalance(userId, leaveTypeId);
+
+        if (leaveBalance == null) {
+            throw new IllegalStateException("Unable to load leave balance");
+        }
+
+        if (leaveBalance.getRemaining_days() < days) {
+            throw new IllegalArgumentException("Not enough leave balance");
+        }
+    }
+
+    public void consumeLeaveBalance(int userId, int leaveTypeId, int days) throws SQLException {
+        ensureLeaveBalanceExists(userId, leaveTypeId);
+
+        LeaveBalance leaveBalance = findLeaveBalance(userId, leaveTypeId);
+        if (leaveBalance == null) {
+            throw new IllegalStateException("Unable to load leave balance");
+        }
+
+        if (leaveBalance.getRemaining_days() < days) {
+            throw new IllegalArgumentException("Not enough leave balance");
+        }
+
+        leaveBalance.setConsumed_days(leaveBalance.getConsumed_days() + days);
+        leaveBalance.setRemaining_days(leaveBalance.getRemaining_days() - days);
+        updateLeaveBalance(leaveBalance);
+    }
+
+    public void refundLeaveBalance(int userId, int leaveTypeId, int days) throws SQLException {
+        if (days <= 0) {
+            return;
+        }
+
+        LeaveBalance leaveBalance = findLeaveBalance(userId, leaveTypeId);
+        if (leaveBalance == null) {
+            throw new IllegalStateException("Unable to load leave balance");
+        }
+
+        int refundableDays = Math.min(days, leaveBalance.getConsumed_days());
+        leaveBalance.setConsumed_days(leaveBalance.getConsumed_days() - refundableDays);
+        leaveBalance.setRemaining_days(leaveBalance.getRemaining_days() + refundableDays);
+        updateLeaveBalance(leaveBalance);
+    }
+
     public void checkLeaveBalance(int userId, int leaveTypeId, int days) {
         // Find the leave balance for the user and leave type
         LeaveBalance leaveBalance = findLeaveBalance(userId, leaveTypeId);

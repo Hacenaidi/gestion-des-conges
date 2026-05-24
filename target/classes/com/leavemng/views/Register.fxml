@@ -79,6 +79,7 @@
                   </VBox>
                </children>
             </GridPane>
+            <Label fx:id="errorLabel" id="errorLabel" alignment="CENTER" wrapText="true" />
             <Button fx:id="registerButton" mnemonicParsing="false" prefWidth="220.0" text="Register" onAction="#handleRegisterButtonAction">
                <font>
                   <Font size="18.0" />
@@ -88,7 +89,4 @@
          </children>
       </VBox>
    </center>
-   <bottom>
-      <Label fx:id="errorLabel" id="errorLabel" BorderPane.alignment="CENTER"/>
-   </bottom>
 </BorderPane>

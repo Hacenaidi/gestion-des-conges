@@ -49,13 +49,14 @@ public class AdminProfileController {
 
     @FXML
     private void handleSaveButtonAction(ActionEvent event) {
+        String username = usernameField.getText().trim();
         String email = emailField.getText().trim();
         String phone = phoneField.getText().trim();
         String departement = departementField.getText().trim();
         String birthDate = birthDateField.getText().trim();
 
         // Validate inputs
-        if (email.isEmpty() || phone.isEmpty() || departement.isEmpty() || birthDate.isEmpty()) {
+        if (username.isEmpty() || email.isEmpty() || phone.isEmpty() || departement.isEmpty() || birthDate.isEmpty()) {
             errorLabel.setText("All fields are required.");
             return;
         }
@@ -70,7 +71,7 @@ public class AdminProfileController {
         if (!email.equals(currentUser.getEmail())) {
             try {
                 UserDAO userDAO = new UserDAO();
-                User existingUser = userDAO.getUserByEmail(email);
+                User existingUser = userDAO.getUserByEmailIgnoreCase(email);
                 if (existingUser != null) {
                     errorLabel.setText("This email is already in use.");
                     return;
@@ -81,7 +82,22 @@ public class AdminProfileController {
             }
         }
 
+        if (!username.equals(currentUser.getUsername())) {
+            try {
+                UserDAO userDAO = new UserDAO();
+                User existingUser = userDAO.getUser(username);
+                if (existingUser != null) {
+                    errorLabel.setText("This username is already in use.");
+                    return;
+                }
+            } catch (SQLException e) {
+                errorLabel.setText("Database error: " + e.getMessage());
+                return;
+            }
+        }
+
         // Update user
+        currentUser.setUsername(username);
         currentUser.setEmail(email);
         currentUser.setPhone(phone);
         currentUser.setDepartement(departement);

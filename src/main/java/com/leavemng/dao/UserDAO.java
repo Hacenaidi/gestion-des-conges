@@ -73,6 +73,29 @@ public class UserDAO {
         return null;
     }
 
+    public User getUserByEmailIgnoreCase(String email) throws SQLException {
+        String sql = "SELECT * FROM user WHERE LOWER(email) = LOWER(?)";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setPhone(rs.getString("phone"));
+                user.setIs_admin(rs.getBoolean("is_admin"));
+                user.setDepartement(rs.getString("departement"));
+                user.setBirth_date(rs.getString("birth_date"));
+                user.setAnnual_balance(rs.getInt("annual_balance"));
+                return user;
+            }
+        }
+        return null;
+    }
+
     public User getUserById(int id) throws SQLException {
         String sql = "SELECT * FROM user WHERE id = ?";
         try (Connection conn = DatabaseUtil.getConnection();
@@ -111,6 +134,16 @@ public class UserDAO {
             stmt.executeUpdate();
         }
         return user;
+    }
+
+    public void updateUserPassword(int userId, String hashedPassword) throws SQLException {
+        String sql = "UPDATE user SET password = ? WHERE id = ?";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, hashedPassword);
+            stmt.setInt(2, userId);
+            stmt.executeUpdate();
+        }
     }
 
     public List<User> getAllUsers() throws SQLException {

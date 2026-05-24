@@ -17,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import com.leavemng.models.User; // Import User
 import com.leavemng.dao.LeaveBalanceDAO; // Import LeaveBalanceDAO
-import com.leavemng.dao.UserDAO; // Import UserDAO
 public class RequestLeaveController {
 
   @FXML
@@ -43,9 +42,9 @@ public class RequestLeaveController {
     LocalDate endDate = endDatePicker.getValue();
     
     if (startDate != null && endDate != null) {
-      long days = java.time.temporal.ChronoUnit.DAYS.between(startDate, endDate);
+      long days = java.time.temporal.ChronoUnit.DAYS.between(startDate, endDate) + 1;
       if (days <= 0) {
-        daysLabel.setText("Invalid date range. The end date must be after the start date.");
+        daysLabel.setText("Invalid date range. The end date must be on or after the start date.");
         daysLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #ef4444;");
       } else {
         daysLabel.setText(days + " day(s)");
@@ -69,6 +68,28 @@ public class RequestLeaveController {
     System.out.println("--------------------------");
     System.out.println(leaveTypes);
     idTypeComboBox.setItems(FXCollections.observableArrayList(leaveTypes)); // Set items in ComboBox
+    idTypeComboBox.setCellFactory(listView -> new javafx.scene.control.ListCell<LeaveType>() {
+      @Override
+      protected void updateItem(LeaveType item, boolean empty) {
+        super.updateItem(item, empty);
+        if (empty || item == null) {
+          setText(null);
+        } else {
+          setText(item.getName() + " (max " + item.getMax_days() + " days)");
+        }
+      }
+    });
+    idTypeComboBox.setButtonCell(new javafx.scene.control.ListCell<LeaveType>() {
+      @Override
+      protected void updateItem(LeaveType item, boolean empty) {
+        super.updateItem(item, empty);
+        if (empty || item == null) {
+          setText(null);
+        } else {
+          setText(item.getName() + " (max " + item.getMax_days() + " days)");
+        }
+      }
+    });
     
     // Add listeners to DatePickers to update days display
     startDatePicker.valueProperty().addListener((obs, oldVal, newVal) -> updateDaysDisplay());
@@ -120,10 +141,10 @@ public class RequestLeaveController {
     
 
     // Difference between start date and end date.
-    final int days = (int) java.time.temporal.ChronoUnit.DAYS.between(startDate, endDate);
+    final int days = (int) java.time.temporal.ChronoUnit.DAYS.between(startDate, endDate) + 1;
 
     if (days <= 0) {
-      errorLabel.setText("Invalid date range. The end date must be after the start date.");
+      errorLabel.setText("Invalid date range. The end date must be on or after the start date.");
         return;
     }
     if (days>currentUser.getAnnual_balance()) {
@@ -131,14 +152,10 @@ public class RequestLeaveController {
         return;
     }
     
-    // checkLeaveBalance
+    // Validate leave balance without consuming it yet.
     LeaveBalanceDAO leaveBalanceDAO = new LeaveBalanceDAO();
     try {
-      leaveBalanceDAO.checkLeaveBalance(currentUser.getId(), idType, days);
-      currentUser.setAnnual_balance(currentUser.getAnnual_balance()-days);
-
-        UserDAO userDAO = new UserDAO();
-        userDAO.updateAnnualBalance(currentUser.getId(), currentUser.getAnnual_balance());
+      leaveBalanceDAO.validateLeaveBalance(currentUser.getId(), idType, days);
     } catch (Exception e) { 
     //   show error message
       errorLabel.setText(e.getMessage());

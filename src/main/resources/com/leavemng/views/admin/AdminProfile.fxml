@@ -11,7 +11,7 @@
     
     <VBox spacing="3.0">
         <Label text="Username:" style="-fx-font-size: 14.0; -fx-font-weight: bold;"/>
-        <TextField fx:id="usernameField" promptText="Username" editable="false"/>
+        <TextField fx:id="usernameField" promptText="Username"/>
     </VBox>
 
     <VBox spacing="3.0">

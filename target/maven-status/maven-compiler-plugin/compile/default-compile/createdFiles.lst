@@ -13,6 +13,7 @@ com\leavemng\controllers\admin\ViewUsersController.class
 com\leavemng\models\LeaveRequest.class
 com\leavemng\utils\Navigation.class
 com\leavemng\controllers\admin\PendingRequestsController.class
+com\leavemng\controllers\RequestLeaveController$1.class
 com\leavemng\controllers\admin\AdminProfileController.class
 com\leavemng\dao\LeaveRequestDAO.class
 com\leavemng\controllers\PersonalRequestsController.class
@@ -26,12 +27,14 @@ com\leavemng\controllers\admin\EditLeaveTypeController.class
 com\leavemng\utils\DatabaseTest.class
 com\leavemng\dao\LeaveTypeDAO.class
 module-info.class
+com\leavemng\controllers\RequestLeaveController$2.class
 com\leavemng\controllers\RequestLeaveController.class
 com\leavemng\utils\AuthUtil.class
 com\leavemng\dao\LeaveBalanceDAO.class
 com\leavemng\models\LeaveType.class
 com\leavemng\controllers\admin\ViewUsersController$1$1.class
 com\leavemng\utils\UpdateUserRole.class
+com\leavemng\utils\PasswordUtil.class
 com\leavemng\controllers\RegisterController.class
 com\leavemng\dao\UserDAO.class
 com\leavemng\controllers\admin\LeaveTypeController.class

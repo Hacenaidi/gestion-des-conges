@@ -2,6 +2,7 @@ package com.leavemng.controllers;
 
 import com.leavemng.dao.UserDAO;
 import com.leavemng.models.User;
+import com.leavemng.utils.PasswordUtil;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,22 +47,16 @@ public class RegisterController {
 
         UserDAO userDAO = new UserDAO();
         try {
-            User existingUsername = userDAO.getUser(name);
-            if (existingUsername != null) {
-                errorLabel.setText("This username is already taken.");
-                return;
-            }
-
-            User existingUser = userDAO.getUserByEmail(email);
+            User existingUser = userDAO.getUserByEmailIgnoreCase(email);
             if (existingUser != null) {
-                errorLabel.setText("Email already exists.");
+                errorLabel.setText("This email is already taken.");
                 return;
             }
 
             User user = new User();
             user.setUsername(name); 
             user.setEmail(email);
-            user.setPassword(password);
+            user.setPassword(PasswordUtil.hash(password));
             user.setPhone(phone);
             user.setDepartement(departement);
             user.setBirth_date(birthDate);

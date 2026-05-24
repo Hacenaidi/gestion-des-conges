@@ -20,6 +20,7 @@
         <Button text="Dashboard" onAction="#handleDashboardButtonAction"/>
         <Button fx:id="approveButton" text="Approve" onAction="#handleApproveButtonAction"/>
         <Button fx:id="rejectButton" text="Reject" onAction="#handleRejectButtonAction"/>
+        <Button fx:id="deleteButton" text="Delete" onAction="#handleDeleteButtonAction"/>
     </HBox>
 
 </VBox>

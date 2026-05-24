@@ -4,6 +4,7 @@ import com.leavemng.dao.UserDAO;
 import com.leavemng.models.User;
 import com.leavemng.utils.SessionManager;
 import com.leavemng.utils.Navigation;
+import com.leavemng.utils.PasswordUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,8 +31,13 @@ public class LoginController {
 
         UserDAO userDAO = new UserDAO();
         try {
-            User user = userDAO.getUserByEmail(email);
-            if (user != null && user.getPassword().equals(password)) {
+            User user = userDAO.getUserByEmailIgnoreCase(email);
+            if (user != null && PasswordUtil.matches(password, user.getPassword())) {
+                if (password.equals(user.getPassword())) {
+                    user.setPassword(PasswordUtil.hash(password));
+                    userDAO.updateUser(user);
+                }
+
                 // Store the logged-in user in the session manager
                 SessionManager.getInstance().setCurrentUser(user);
 

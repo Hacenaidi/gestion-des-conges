@@ -79,6 +79,15 @@ public class LeaveRequestDAO {
         }
     }
 
+    public void deleteLeaveRequest(int id) throws SQLException {
+        String sql = "DELETE FROM leave_request WHERE id = ?";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+    }
+
     public List<LeaveRequest> getAllLeaveRequestsOrdered() throws SQLException {
         List<LeaveRequest> leaveRequests = new ArrayList<>();
         String sql = "SELECT * FROM leave_request ORDER BY CASE status WHEN 'pending' THEN 0 WHEN 'approved' THEN 1 WHEN 'rejected' THEN 2 ELSE 3 END, id ASC";
