@@ -86,10 +86,6 @@ public class AdminProfileController {
             try {
                 UserDAO userDAO = new UserDAO();
                 User existingUser = userDAO.getUser(username);
-                if (existingUser != null) {
-                    errorLabel.setText("This username is already in use.");
-                    return;
-                }
             } catch (SQLException e) {
                 errorLabel.setText("Database error: " + e.getMessage());
                 return;

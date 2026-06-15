@@ -113,14 +113,4 @@ public final class EmailService {
         return value == null || value.isBlank() ? defaultValue : value;
     }
 
-    private static String getRequiredConfig(String key) {
-        String value = System.getProperty(key);
-        if (value == null || value.isBlank()) {
-            value = System.getenv(key);
-        }
-        if (value == null || value.isBlank()) {
-            throw new IllegalStateException("SMTP is not configured. Set " + key + ".");
-        }
-        return value;
-    }
 }
